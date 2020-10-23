@@ -164,7 +164,7 @@ $(function(){
 		}else if(ch==3){
 			pink++;
 			mclaren++;
-			renault++;
+			renault+=2;
 		}else if(ch==4)
 			marc++;
 		else if(ch==5){
@@ -185,6 +185,7 @@ $(function(){
 			}
 			ferr++;
 			marc++;	
+			renault++;
 		}else if(ch==8){
 			tauri++;
 			redb++;
@@ -205,6 +206,7 @@ $(function(){
 			}
 			ferr++;
 			marc++;
+			renault++;
 		}else if(ch==11){
 			redb++;
 			mclaren++;
@@ -212,6 +214,12 @@ $(function(){
 			marc++;
 			renault++;
 		}else if(ch==12){
+			if(ferr !=0){
+			 ferr--;
+			}
+			if(marc !=0){
+			 marc--;
+			}
 			hass+=4;
 			pink++;
 			tauri++;
