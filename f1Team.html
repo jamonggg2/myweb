@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.btn-primary{
+		background-color: #D11212; 
+		border-color: #FF0000;
+	}
+	.btn-primary:hover{
+		background-color: #B40404; 
+		border-color: #FF0000;
+	}
+	
+	.bg-info{
+		background-color: #1C1C1C;
+	}
+	#answer4_1{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container-fluid bg-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h3><span class="label label-warning" id="qid">F1</span> 당신의 F1팀을 찾아라</h3>
+        </div>
+        <div class="modal-body">
+            <div class="col-xs-3 col-xs-offset-5">
+               <div id="loadbar" style="display: none;">
+                  <div class="blockG" id="rotateG_01"></div>
+                  <div class="blockG" id="rotateG_02"></div>
+                  <div class="blockG" id="rotateG_03"></div>
+                  <div class="blockG" id="rotateG_04"></div>
+                  <div class="blockG" id="rotateG_05"></div>
+                  <div class="blockG" id="rotateG_06"></div>
+                  <div class="blockG" id="rotateG_07"></div>
+                  <div class="blockG" id="rotateG_08"></div>
+              </div>
+          </div>
+
+          <div class="quiz" id="quiz1" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">빨강색이 좋다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">파란색이 좋다</label> 
+           <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">다른색이 좋다</label> 
+       </div>
+        <div class="quiz" id="quiz2" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">독일이 좋다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="5">영국이 좋다</label> 
+           <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="6">이탈리아 좋다</label> 
+       </div>
+        <div class="quiz" id="quiz3" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="7">노련함이 좋다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="8">젊음이 좋다</label> 
+       </div>
+        <div class="quiz" id="quiz4" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="9">재미있는것이 좋다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="10">진지한것이 좋다</label> 
+       </div>
+        <div class="quiz" id="quiz5" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="11">빅앤리치의 매력</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="12">언더독의 매력</label> 
+       </div>
+       <div class="quiz answerq" id="answer4" data-toggle="buttons">
+           <label  class="answerq" id="answer4_1"></label>        
+       </div>
+   </div>
+   <div class="modal-footer text-muted">
+    <span id="answer"></span>
+</div>
+</div>
+</div>
+</div>
+	
+<!-- <script type="text/javascript" src="js.js"></script> -->
+	
+<script type="text/javascript">
+$(function(){
+	
+
+	$("#quiz2").hide();
+	$("#quiz3").hide();
+	$("#quiz4").hide();
+	$("#quiz5").hide();
+	$("#answer4").hide();
+	
+	var ferr =0;
+	var marc =0;
+	var hass =0;
+	var pink =0;
+	var redb =0;
+	var tauri =0;
+	var renault =0;
+	var mclaren=0;
+	var romeo =0;
+	var will =0;
+	
+    var loading = $('#loadbar').hide();
+    $(document)
+    .ajaxStart(function () {
+        loading.show();
+    }).ajaxStop(function () {
+    	loading.hide();
+    });
+		
+    
+    $("label.btn").on('click',function () {
+    	var choice = $(this).find('input:radio').val();	
+		var selected = $(this).parent().attr('id');
+    	$('#loadbar').show();
+    	$(this).parent().fadeOut();
+    	setTimeout(function(){
+            $('#loadbar').fadeOut();
+
+			select(selected);
+			count(choice);
+           /* something else */
+    	}, 800);
+		
+    });
+
+	function select(se){
+		if(se=='quiz1'){
+			 $("#quiz1").hide();
+             $("#quiz2").show();
+		}else if(se=='quiz2'){
+			 $("#quiz2").hide();
+             $("#quiz3").show();
+		}else if(se=='quiz3'){
+			$("#quiz3").hide(); 
+			$("#quiz4").show(); 
+		}else if(se=='quiz4'){
+			$("#quiz4").hide(); 
+			$("#quiz5").show(); 
+		}else if(se=='quiz5'){
+			$("#quiz5").hide();
+			$( "#answer4_1" ).html(last()); 
+			$("#answer4").show(); 
+		}
+	}
+		
+		
+	function count(ch){
+		if(ch==1){
+			ferr++;
+			romeo++;
+		}else if(ch==2){
+			redb++;
+			will++;
+			tauri++;
+		}else if(ch==3){
+			pink++;
+			mclaren++;
+			renault++;
+		}else if(ch==4)
+			marc++;
+		else if(ch==5){
+			pink++;
+			redb++;
+			mclaren++;
+			will++;	
+		}
+		else if(ch==6){
+			ferr++;
+			tauri++;
+		}else if(ch==7){
+			if(tauri !=0){
+				tauri--;
+			}
+			if(redb !=0){
+				redb--;
+			}
+			ferr++;
+			marc++;	
+		}else if(ch==8){
+			tauri++;
+			redb++;
+			romeo++;
+			will++;
+		}else if(ch==9){
+			pink++;
+			redb+=2;
+			mclaren+=2;
+			hass +=2;
+			if(ferr !=0){
+				ferr--;
+			}
+			
+		}else if(ch==10){
+			if(redb !=0){
+				redb--;
+			}
+			ferr++;
+			marc++;
+		}else if(ch==11){
+			redb++;
+			mclaren++;
+			ferr++;
+			marc++;
+			renault++;
+		}else if(ch==12){
+			hass+=4;
+			pink++;
+			tauri++;
+			romeo+=2;
+			will+=3;
+		}
+			
+	};
+	
+	function last() {
+		var max = Math.max(ferr,marc,redb,mclaren,renault,hass,pink,tauri,romeo,will);
+        if (max==ferr)
+            return '페라리';
+    	else if(max==mclaren)
+			return '맥라렌';
+		else if(max==renault)
+			return '르노';
+		else if(max==hass)
+			return '하스';
+		else if(max==pink)
+			return '레이싱포인트';
+		else if(max==tauri)
+			return '알파타우리';
+		else if(max==romeo)
+			return '알파로메오';
+		else if(max==will)
+			return '윌리엄스';
+        else if(max==marc)
+            return '메르세데스';
+		else if(max==redb)
+			return '레드불';
+	
+    }
+               
+
+   
+});	
+
+
+
+</script>
+</body>
+</html>
