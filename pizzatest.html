@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.btn-primary{
+		background-color: #FA5858; 
+		border-color: #FF0000;
+	}
+	.btn-primary:hover{
+		background-color: #FA8258; 
+		border-color: #FF0000;
+	}
+	
+	.bg-info{
+		background-color: #F5D0A9;
+	}
+	#answer4_1{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container-fluid bg-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h3><span class="label label-warning" id="qid">핏!자</span> 당신의 피자를 찾아라</h3>
+        </div>
+        <div class="modal-body">
+            <div class="col-xs-3 col-xs-offset-5">
+               <div id="loadbar" style="display: none;">
+                  <div class="blockG" id="rotateG_01"></div>
+                  <div class="blockG" id="rotateG_02"></div>
+                  <div class="blockG" id="rotateG_03"></div>
+                  <div class="blockG" id="rotateG_04"></div>
+                  <div class="blockG" id="rotateG_05"></div>
+                  <div class="blockG" id="rotateG_06"></div>
+                  <div class="blockG" id="rotateG_07"></div>
+                  <div class="blockG" id="rotateG_08"></div>
+              </div>
+          </div>
+
+          <div class="quiz" id="quiz1" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">심플 이즈 베스트</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">스페셜 이즈 베스트</label> 
+       </div>
+        <div class="quiz" id="quiz2" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">따뜻한 파인애플이 좋다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">파인애플 말고도 특별할 수 있잖아</label> 
+       </div>
+        <div class="quiz" id="quiz3" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="5">아는 맛중 최고가 좋아</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="6">모르는 맛을 도전 할래</label> 
+       </div>
+        <div class="quiz" id="quiz4" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="7">느끼한것이 좋아</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="8">깔끔한 맛이 좋아</label> 
+       </div>
+       <div class="quiz answerq" id="answer4" data-toggle="buttons">
+           <label  class="answerq" id="answer4_1"></label>        
+       </div>
+   </div>
+   <div class="modal-footer text-muted">
+    <span id="answer"></span>
+</div>
+</div>
+</div>
+</div>
+	
+<!-- <script type="text/javascript" src="js.js"></script> -->
+	
+<script type="text/javascript">
+$(function(){
+	
+
+	$("#quiz2").hide();
+	$("#quiz3").hide();
+	$("#quiz4").hide();
+	$("#answer4").hide();
+	
+	var simple =0;
+	var special =0;
+	var pin =0;
+	
+    var loading = $('#loadbar').hide();
+    $(document)
+    .ajaxStart(function () {
+        loading.show();
+    }).ajaxStop(function () {
+    	loading.hide();
+    });
+		
+    
+    $("label.btn").on('click',function () {
+    	var choice = $(this).find('input:radio').val();	
+		var selected = $(this).parent().attr('id');
+    	$('#loadbar').show();
+    	$(this).parent().fadeOut();
+    	setTimeout(function(){
+            $('#loadbar').fadeOut();
+
+			select(selected);
+			count(choice);
+           /* something else */
+    	}, 800);
+		
+    });
+
+	function select(se){
+		if(se=='quiz1'){
+			 $("#quiz1").hide();
+             $("#quiz2").show();
+		}else if(se=='quiz2'){
+			 $("#quiz2").hide();
+             $("#quiz3").show();
+		}else if(se=='quiz3'){
+			$("#quiz3").hide(); 
+			$("#quiz4").show(); 
+		}else if(se=='quiz4'){
+			$("#quiz4").hide();
+			$( "#answer4_1" ).html(last()); 
+			$("#answer4").show(); 
+		}
+	}
+		
+		
+	function count(ch){
+		if(ch==1)
+			simple++;
+		else if(ch==2)
+			special++;
+		else if(ch==3)
+			pin++;
+		else if(ch==4)
+			special++;
+		else if(ch==5)
+			simple++;
+		else if(ch==6)
+			special++;
+		else if(ch==7)
+			special++;
+		else if(ch==8)
+			simple++;
+	};
+	
+	function last() {
+        if (simple>special && pin==0)
+            return '치즈피자';
+        else if(simple>special && pin!=0)
+            return '하와이안 피자';
+		else if(simple<special && pin ==0)
+			return '맥앤치즈피자';
+		else if(simple<special && pin !=0)
+			return '하와이안 페퍼로니 피자';
+		else if(simple == special && pin ==0)
+			return '페퍼로니 피자';
+		else if(simple == special && pin !=0)
+			return '프렌차이즈 신제품 피자';
+    }
+               
+
+   
+});	
+
+
+
+</script>
+</body>
+</html>
