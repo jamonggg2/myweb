@@ -145,14 +145,27 @@ $(function(){
 			pin++;
 		else if(ch==4)
 			special++;
-		else if(ch==5)
+		else if(ch==5){
 			simple++;
-		else if(ch==6)
+			if(special !=0){
+			 special--;
+			}
+		}else if(ch==6){
 			special++;
-		else if(ch==7)
+			if(simple !=0){
+			 simple--;
+			}
+		}else if(ch==7){
 			special++;
-		else if(ch==8)
+			if(simple !=0){
+			 simple--;
+			}
+		}else if(ch==8){
 			simple++;
+			if(special !=0){
+			 special--;
+			}
+		}
 	};
 	
 	function last() {
